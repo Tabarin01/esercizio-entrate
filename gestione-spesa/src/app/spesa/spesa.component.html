@@ -1,0 +1,46 @@
+<body>
+  <div class="container">
+    <mat-card>
+      <mat-card-title>Inserisci importo</mat-card-title>
+      <mat-form-field>
+        <input
+          matInput
+          type="text"
+          placeholder="Importo"
+          [(ngModel)]="importo"
+          inputmode="numeric"
+        />
+      </mat-form-field>
+      <div class="buttons">
+        <button mat-raised-button color="primary" (click)="onClick('entrata')">
+          Entrata
+        </button>
+        <button mat-raised-button color="warn" (click)="onClick('uscita')">
+          Uscita
+        </button>
+      </div>
+    </mat-card>
+
+    <mat-card>
+      <mat-card-title>Spese</mat-card-title>
+      <mat-card-content>
+        <div *ngFor="let spesa of spese">
+          <!-- property binding + interpolation -->
+          <span [style.color]="spesa.tipo === 'entrata' ? 'green' : 'red'"
+            >{{ spesa.importo }} € {{ spesa.tipo.toUpperCase() }}</span
+          >
+          <button mat-icon-button color="warn" (click)="rimuoviSpesa(spesa)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+      <mat-card-title>Totale</mat-card-title>
+      <mat-card-content>
+        <span>{{ calcolaTotale() }} €</span>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</body>
